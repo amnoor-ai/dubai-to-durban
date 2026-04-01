@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { CartItem, Perfume } from "@/shared/types/perfume";
+import { formatCurrency } from "@/src/shared/utils/format";
 
 const STORAGE_KEY = "cart";
 
@@ -83,9 +84,9 @@ export function useCart({
     const orderItems = cart
       .map(
         (item, index) =>
-          `${index + 1}. ${item.name} x${item.quantity} - $${
+          `${index + 1}. ${item.name} x${item.quantity} - ${formatCurrency(
             item.price * item.quantity
-          }`
+          )}`
       )
       .join("\n");
 
@@ -93,7 +94,7 @@ export function useCart({
 
 ${orderItems}
 
-Total: $${totalPrice}`;
+Total: ${formatCurrency(totalPrice)}`;
 
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
       message

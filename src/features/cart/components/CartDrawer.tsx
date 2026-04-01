@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { PLACEHOLDER_IMAGE } from "@/shared/types/perfume";
 import type { CartItem } from "@/shared/types/perfume";
+import { formatCurrency } from "@/src/shared/utils/format";
 
 type Props = {
   isOpen: boolean;
@@ -58,10 +59,10 @@ const CartDrawerItem = memo(function CartDrawerItem({
           </div>
 
           <p className={darkMode ? "text-gray-300" : "text-gray-700"}>
-            ${item.price} each
+            {formatCurrency(item.price)} each
           </p>
           <p className="text-sm text-yellow-400">
-            Subtotal: ${item.price * item.quantity}
+            Subtotal: {formatCurrency(item.price * item.quantity)}
           </p>
         </div>
       </div>
@@ -152,7 +153,7 @@ function CartDrawerFooter({
     <div className={`border-t p-6 ${darkMode ? "border-gray-800" : "border-gray-300"}`}>
       <div className="mb-4 flex items-center justify-between">
         <h4 className="text-lg font-semibold">Total</h4>
-        <p className="text-lg font-bold text-yellow-400">${totalPrice}</p>
+        <p className="text-lg font-bold text-yellow-400">{formatCurrency(totalPrice)}</p>
       </div>
       <button
         onClick={onCheckout}

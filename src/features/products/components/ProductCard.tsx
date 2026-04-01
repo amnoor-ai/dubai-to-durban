@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { PLACEHOLDER_IMAGE } from "@/shared/types/perfume";
 import type { Perfume } from "@/shared/types/perfume";
+import { formatCurrency } from "@/src/shared/utils/format";
 
 type Props = { product: Perfume; onAdd: (p: Perfume) => void; darkMode: boolean };
 
@@ -21,7 +22,7 @@ export const ProductCard = memo(function ProductCard({
         <img src={product.image} alt={product.name} className="h-64 w-full object-contain" onError={(e) => { e.currentTarget.src = PLACEHOLDER_IMAGE; }} />
       </div>
       <h4 className={`mb-2 text-xl font-semibold ${darkMode ? "text-white" : "text-black"}`}>{product.name}</h4>
-      <p className={`${cardTextClass} mb-4 text-lg`}>${product.price}</p>
+      <p className={`${cardTextClass} mb-4 text-lg`}>{formatCurrency(product.price)}</p>
       <button onClick={() => onAdd(product)} className="w-full rounded-full bg-yellow-500 px-6 py-3 font-semibold text-black transition-colors hover:bg-yellow-400">Add to Cart</button>
     </div>
   );
